@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
+import fs from "fs";
 
 import authRoutes from "./routes/auth.routes.js";
 import publicRoutes from "./routes/public.routes.js";
@@ -18,6 +19,28 @@ app.use(express.urlencoded({ extended: true }));
 
 // Carpeta estatica para acceder a los archivos subidos (examenes)
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
+
+// Endpoint GET /files - Lista archivos de la carpeta uploads
+app.get("/files", (req, res) => {
+  const carpetaUploads = path.join(process.cwd(), "uploads");
+  
+  fs.readdir(carpetaUploads, (err, archivos) => {
+    if (err) {
+      return res.status(500).json({
+        ok: false,
+        mensaje: "No se pudo leer el directorio de archivos.",
+      });
+    }
+    
+    const archivosFiltrados = archivos.filter((nombre) => nombre !== ".gitkeep");
+    
+    res.status(200).json({
+      ok: true,
+      total: archivosFiltrados.length,
+      archivos: archivosFiltrados,
+    });
+  });
+});
 
 // Rutas publicas
 app.use("/api/auth", authRoutes); // POST /api/auth/login

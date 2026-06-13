@@ -35,11 +35,11 @@ const filtroArchivo = (req, file, cb) => {
   }
 };
 
-// Middleware de subida configurado: solo PDF, maximo 5MB
+// Middleware de subida configurado: solo PDF, maximo 20MB
 export const uploadPdf = multer({
   storage,
   fileFilter: filtroArchivo,
   limits: {
-    fileSize: 5 * 1024 * 1024, // 5MB
+    fileSize: 20 * 1024 * 1024, // 20MB
   },
 });
