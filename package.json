@@ -1,0 +1,21 @@
+{
+  "name": "api-backend-clinica",
+  "version": "1.0.0",
+  "description": "API REST con Node.js y Express para gestion de pacientes, medicos, examenes y autenticacion JWT - Evaluacion Final Modulo 8",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": ["api", "express", "jwt", "node"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.0"
+  }
+}
